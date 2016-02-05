@@ -29,7 +29,8 @@ function move_window(rect) {
     Window.focusedWindow().setFrame(r);
 }
 
-/* New-style prefix keys, WIP */
+/* Support a prefix key with multiple suffix keys */
+
 function PrefixKey(key, modifiers, description) {
     this.modal = centered_modal(description);
     this.suffixes = [];
@@ -39,6 +40,7 @@ function PrefixKey(key, modifiers, description) {
         that.modal.show();
     });
 }
+
 PrefixKey.prototype.enableSuffixes = function () {
     this.suffixes.forEach(function (x) {
         x.enable();
@@ -59,19 +61,25 @@ PrefixKey.prototype.addSuffix = function (key, modifiers, cb) {
     result.disable();
     this.suffixes.push(result);
     return result;
-}
-var gPrefix = new PrefixKey('space', ['alt'], "h - Left Half\nl - Right Half\ng - Wide Center\nm - Max\nesc - Abort");
-var gLeft = gPrefix.addSuffix('h', [], function () {
+};
+
+/* Window handling prefix key */
+
+var wPrefix = new PrefixKey('space', ['alt'], "h - Left Half\nl - Right Half\ng - Wide Center\nm - Max\nesc - Abort");
+var wLeft = wPrefix.addSuffix('h', [], function () {
     move_window({x: 0, y: 0, width: 0.5, height: 1.0});
 });
-var gRight = gPrefix.addSuffix('l', [], function () {
+var wRight = wPrefix.addSuffix('l', [], function () {
     move_window({x: 0.5, y: 0, width: 0.5, height: 1.0});
 });
-var gCenter = gPrefix.addSuffix('g', [], function () {
+var wCenter = wPrefix.addSuffix('g', [], function () {
     move_window({x: 0.15, y: 0, width: 0.7, height: 1.0});
 });
-var gMax = gPrefix.addSuffix('m', [], function () {
+var wMax = wPrefix.addSuffix('m', [], function () {
     move_window({x: 0, y: 0, width: 1.0, height: 1.0});
 });
-var gEscape = gPrefix.addSuffix('escape', [], function () {});
+var wAlmostMax = wPrefix.addSuffix('n', [], function () {
+    move_window({x: 0.1, y:0, width: 0.9, height: 1.0});
+});
+var wEscape = wPrefix.addSuffix('escape', [], function () {});
 
