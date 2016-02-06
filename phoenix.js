@@ -46,8 +46,8 @@ PrefixKey.prototype.enableSuffixes = function () {
     var that = this;
     this.suffixes.forEach(function (x) {
         var h = Phoenix.bind(x.key, x.modifiers, function () {
-            x.cb();
             that.disableSuffixes();
+            x.cb();
             that.modal.close();
         });
         h.enable();
