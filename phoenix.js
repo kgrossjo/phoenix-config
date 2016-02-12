@@ -97,9 +97,6 @@ wPrefix.addSuffix('g', [], function () {
 wPrefix.addSuffix('m', [], function () {
     move_window({x: 0, y: 0, width: 1.0, height: 1.0});
 });
-wPrefix.addSuffix('n', [], function () {
-    move_window({x: 0.1, y:0, width: 0.9, height: 1.0});
-});
 wPrefix.addSuffix('c', [], function () {
     move_window({x: 0.2, y: 0.2, width: 0.6, height: 0.6});
 });
@@ -115,27 +112,3 @@ wPrefix.addSuffix('s', [], function () {
 wPrefix.addSuffix('escape', [], function () {});
 wPrefix.addSuffix('space', ['ctrl', 'alt', 'cmd'], function () {});
 
-/* Window List */
-
-function showWindowList() {
-    Phoenix.log("showWindowList start");
-    var windows = Window.windows();
-    Phoenix.log("" + windows.length + " windows");
-    var s = "Window List:\n\n";
-    windows.forEach(function (w) {
-        s += " " + w.title() + "\n";
-    });
-    var m = new Modal();
-    m.message = s;
-    m.duration = 5;
-    m.show();
-}
-var wListTest = Phoenix.bind('g', ['alt'], showWindowList);
-
-// /* testing */
-// var screens = Screen.screens();
-// screens.forEach(function (scr) {
-//     Phoenix.log("Screen");
-//     var r = scr.visibleFrameInRectangle();
-//     Phoenix.log(JSON.stringify(r));
-// });
