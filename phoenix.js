@@ -88,7 +88,7 @@ PrefixKey.prototype.addSuffix = function (key, modifiers, cb) {
 /* Window handling prefix key */
 
 var wPrefix = new PrefixKey('space', ['ctrl', 'alt', 'cmd'],
-    "h - Left Half\nl - Right Half\ng - Wide Center\nm - Max\no - big left\np - big right\ns - next screen\nesc - Abort");
+    "h - Left Half\nl - Right Half\ng - Wide Center\nm - Max\no - big left\np - big right\nO/P - medium left/right\ns - next screen\nesc - Abort");
 wPrefix.addSuffix('h', [], function () {
     move_window({x: 0, y: 0, width: 0.5, height: 1.0});
 });
