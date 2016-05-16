@@ -45,6 +45,10 @@ function move_window_to_next_screen() {
     move_window(relative, nextScreen);
 }
 
+/* Spaces */
+
+
+
 /* Support a prefix key with multiple suffix keys */
 
 function PrefixKey(key, modifiers, description) {
@@ -103,8 +107,14 @@ wPrefix.addSuffix('c', [], function () {
 wPrefix.addSuffix('o', [], function () {
     move_window({x: 0, y: 0, width: 0.9, height: 1.0});
 });
+wPrefix.addSuffix('o', ['shift'], function () {
+    move_window({x: 0, y: 0, width: 0.8, height: 1.0});
+});
 wPrefix.addSuffix('p', [], function () {
     move_window({x: 0.1, y: 0, width: 0.9, height: 1.0});
+});
+wPrefix.addSuffix('p', ['shift'], function () {
+    move_window({x: 0.2, y: 0, width: 0.8, height: 1.0});
 });
 wPrefix.addSuffix('s', [], function () {
     move_window_to_next_screen();
