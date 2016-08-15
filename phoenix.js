@@ -3,7 +3,7 @@
 function centered_modal(message) {
     var result = new Modal();
     result.message = message;
-    var screen_frame = Screen.mainScreen().frameInRectangle();
+    var screen_frame = Screen.main().frameInRectangle();
     var result_frame = result.frame();
     result.origin = {
         x: 0.5 * (screen_frame.width - result_frame.width),
@@ -12,14 +12,14 @@ function centered_modal(message) {
     return result;
 }
 
-var h_reload = Phoenix.bind('r', ['alt'], function () {
+var h_reload = new Key('r', ['alt'], function () {
     Phoenix.reload();
 });
 
 /* Window Handling */
 
 function move_window(rect, screen) {
-    screen = screen || Screen.mainScreen();
+    screen = screen || Screen.main();
     var scr = screen.visibleFrameInRectangle();
     var r = {
         x: Math.round(scr.x + rect.x*scr.width),
@@ -27,11 +27,11 @@ function move_window(rect, screen) {
         width: Math.round(scr.width * rect.width),
         height: Math.round(scr.height * rect.height),
     };
-    Window.focusedWindow().setFrame(r);
+    Window.focused().setFrame(r);
 }
 
 function move_window_to_next_screen() {
-    var currW = Window.focusedWindow();
+    var currW = Window.focused();
     var cwFrame = currW.frame();
     var currScreen = currW.screen();
     var nextScreen = currScreen.next();
@@ -56,7 +56,7 @@ function PrefixKey(key, modifiers, description) {
     this.suffixes = [];
     this.handlers = [];
     var that = this;
-    this.prefix = Phoenix.bind(key, modifiers, function () {
+    this.prefix = new Key(key, modifiers, function () {
         that.enableSuffixes();
         that.modal.show();
     });
@@ -65,7 +65,7 @@ function PrefixKey(key, modifiers, description) {
 PrefixKey.prototype.enableSuffixes = function () {
     var that = this;
     this.suffixes.forEach(function (x) {
-        var h = Phoenix.bind(x.key, x.modifiers, function () {
+        var h = new Key(x.key, x.modifiers, function () {
             that.disableSuffixes();
             x.cb();
             that.modal.close();
@@ -88,7 +88,7 @@ PrefixKey.prototype.addSuffix = function (key, modifiers, cb) {
 /* Window handling prefix key */
 
 var wPrefix = new PrefixKey('space', ['ctrl', 'alt', 'cmd'],
-    "h - Left Half\nl - Right Half\ng - Wide Center\nm - Max\no - big left\np - big right\nO/P - medium left/right\ns - next screen\nesc - Abort");
+    "h/l - Left/Right Half\nc - Center\ng - Wide Center\nm - Max\no/p - big left/right\nO/P - medium left/right\ns - next screen\nesc - Abort");
 wPrefix.addSuffix('h', [], function () {
     move_window({x: 0, y: 0, width: 0.5, height: 1.0});
 });
