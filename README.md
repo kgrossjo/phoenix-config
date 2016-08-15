@@ -15,5 +15,7 @@ position with a preset size.
 * <kbd>M</kbd> - maximize window (width 100%, height 100%)
 * <kbd>O</kbd> - nearly maximize window (width 90%, height 100%, left side of screen)
 * <kbd>P</kbd> - nearly maximize window (width 90%, height 100%, right side of screen)
+* <kbd>Shift-O</kbd> - like <kbd>O</kbd>, but width 80%
+* <kbd>Shift-P</kbd> - like <kbd>P</kbd>, but width 80%
 * <kbd>S</kbd> - move window to next screen, perserving relative size and position
 * <kbd>Esc</kbd> - hit this if you don't want any action
