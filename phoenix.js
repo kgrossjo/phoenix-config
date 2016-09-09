@@ -88,12 +88,15 @@ PrefixKey.prototype.addSuffix = function (key, modifiers, cb) {
 /* Window handling prefix key */
 
 var wPrefix = new PrefixKey('space', ['ctrl', 'alt', 'cmd'],
-    "h/l - Left/Right Half\nc - Center\ng - Wide Center\nm - Max\no/p - big left/right\nO/P - medium left/right\ns - next screen\nesc - Abort");
+    "h/l - Left/Right Half\nn - Centered Half Width\nc - Center\ng - Wide Center\nm - Max\no/p - big left/right\nO/P - medium left/right\ns - next screen\nesc - Abort");
 wPrefix.addSuffix('h', [], function () {
     move_window({x: 0, y: 0, width: 0.5, height: 1.0});
 });
 wPrefix.addSuffix('l', [], function () {
     move_window({x: 0.5, y: 0, width: 0.5, height: 1.0});
+});
+wPrefix.addSuffix('n', [], function () {
+    move_window({x: 0.25, y: 0, width: 0.5, height: 1.0});
 });
 wPrefix.addSuffix('g', [], function () {
     move_window({x: 0.15, y: 0, width: 0.7, height: 1.0});
