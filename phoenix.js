@@ -2,7 +2,7 @@
 
 function centered_modal(message) {
     var result = new Modal();
-    result.message = message;
+    result.text = message;
     var screen_frame = Screen.main().frameInRectangle();
     var result_frame = result.frame();
     result.origin = {
@@ -88,7 +88,7 @@ PrefixKey.prototype.addSuffix = function (key, modifiers, cb) {
 /* Window handling prefix key */
 
 var wPrefix = new PrefixKey('space', ['ctrl', 'alt', 'cmd'],
-    "h/l - Left/Right Half\nn - Centered Half Width\nc - Center\ng - Wide Center\nm - Max\no/p - big left/right\nO/P - medium left/right\ns - next screen\nesc - Abort");
+    "h/l - Left/Right Half\nn - Centered Half Width\nc - Center\ng - Wide Center\nm - Max\no/p - big left/right\nO/P - medium left/right\n1/2 - top left/right\n3/4 - bottom left/right\ns - next screen\nesc - Abort");
 wPrefix.addSuffix('h', [], function () {
     move_window({x: 0, y: 0, width: 0.5, height: 1.0});
 });
@@ -121,6 +121,18 @@ wPrefix.addSuffix('p', ['shift'], function () {
 });
 wPrefix.addSuffix('s', [], function () {
     move_window_to_next_screen();
+});
+wPrefix.addSuffix('1', [], function () {
+    move_window({x: 0.0, y: 0.0, width: 0.5, height: 0.5});
+});
+wPrefix.addSuffix('2', [], function () {
+    move_window({x: 0.5, y: 0.0, width: 0.5, height: 0.5});
+});
+wPrefix.addSuffix('3', [], function () {
+    move_window({x: 0.0, y: 0.5, width: 0.5, height: 0.5});
+});
+wPrefix.addSuffix('4', [], function () {
+    move_window({x: 0.5, y: 0.5, width: 0.5, height: 0.5});
 });
 wPrefix.addSuffix('escape', [], function () {});
 wPrefix.addSuffix('space', ['ctrl', 'alt', 'cmd'], function () {});
