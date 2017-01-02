@@ -1,7 +1,12 @@
 # phoenix-config
 
-Just my personal Phoenix config.  I got inspired by Divvy, so I have implemented
-the following functionality:
+For licensing information, refer to LICENSE.md.
+
+Just my personal Phoenix config.  There are two main functions here,
+the first is window management / manipulation inspired by Divvy.  The second
+is a window selector.
+
+## Window Management
 
 You hit a prefix key.  Then a popup shows up that explains which keys to press
 and what they do.  Each key moves the currently focused window to a preset
@@ -19,3 +24,10 @@ position with a preset size.
 * <kbd>Shift-P</kbd> - like <kbd>P</kbd>, but width 80%
 * <kbd>S</kbd> - move window to next screen, perserving relative size and position
 * <kbd>Esc</kbd> - hit this if you don't want any action
+
+## Window Selector
+
+You hit a prefix key.  A list of all windows shows up, in "most recently used"
+order.  You enter a filter.  The window list shrinks accordingly.  You move down
+or up the list of matching windows using Tab and Shift+Tab, and you hit Return
+to select the currently selected window.
