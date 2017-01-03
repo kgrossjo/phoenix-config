@@ -1,3 +1,5 @@
+"use strict";
+
 /* For licensing information, refer to LICENSE.md. */
 
 function MoveWindowPrefixKey(key, modifiers, description) {

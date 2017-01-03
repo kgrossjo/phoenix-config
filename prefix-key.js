@@ -1,3 +1,5 @@
+"use strict";
+
 /* Support a prefix key with multiple suffix keys */
 /* For licensing information, refer to LICENSE.md. */
 
