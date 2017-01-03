@@ -70,3 +70,5 @@ var windowSelector = new WindowSelector();
 Key.on('return', ['ctrl', 'alt', 'cmd'], function () {
     windowSelector.show();
 });
+
+Phoenix.notify('Phoenix config loaded');
