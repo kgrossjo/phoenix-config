@@ -1,7 +1,9 @@
+"use strict";
+
 /* For licensing information, refer to LICENSE.md. */
 function WindowSelector() {
     this.modal = new Modal();
-
+    this.modal.appearance = 'dark';
     var screen_frame = Screen.main().frameInRectangle();
     this.modal.origin = {
         x: screen_frame.x + 100,
@@ -41,8 +43,20 @@ WindowSelector.prototype.setupKeys = function () {
     this.keys.push(new Key('n', ['ctrl'], function () {
         that.selectNextWindow();
     }));
+    this.keys.push(new Key('up', [], function () {
+        that.selectPreviousWindow();
+    }));
+    this.keys.push(new Key('down', [], function () {
+        that.selectNextWindow();
+    }));
     this.keys.push(new Key('return', [], function () {
         that.focusWindow();
+    }));
+    this.keys.push(new Key('m', ['ctrl'], function () {
+        that.focusWindow();
+    }));
+    this.keys.push(new Key('delete', [], function () {
+        that.backspacePattern();
     }));
     [
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
@@ -74,9 +88,13 @@ WindowSelector.prototype.updateUI = function () {
         var w = this.windowList[i];
         var m = this.matching[i];
         if (!m) continue;
-        var prefix = "- ";
-        if (this.selectedWindow == i) prefix = "# ";
-        lines.push(prefix + this.windowTitle(w));
+        var prefix = "";
+        var suffix = "";
+        if (this.selectedWindow == i) {
+            prefix = "==> ";
+            suffix = " <==";
+        }
+        lines.push(prefix + this.windowTitle(w) + suffix);
     }
     this.modal.text = lines.join("\n");
 };
@@ -88,8 +106,8 @@ WindowSelector.prototype.show = function () {
     this.enableKeys();
 };
 WindowSelector.prototype.dismiss = function () {
-    this.modal.close();
     this.disableKeys();
+    this.modal.close();
 };
 WindowSelector.prototype.updateMatches = function () {
     var regex = this.getRegexForPattern(this.pattern);
@@ -100,6 +118,16 @@ WindowSelector.prototype.updateMatches = function () {
 };
 WindowSelector.prototype.addToPattern = function (key) {
     this.pattern += key;
+    this.updateMatches();
+    this.selectedWindow = 0;
+    this.updateUI();
+};
+WindowSelector.prototype.clearPattern = function () {
+    this.initialize();
+    this.updateUI();
+};
+WindowSelector.prototype.backspacePattern = function () {
+    this.pattern = this.pattern.slice(0, -1);
     this.updateMatches();
     this.selectedWindow = 0;
     this.updateUI();
@@ -120,10 +148,6 @@ WindowSelector.prototype.selectPreviousWindow = function () {
     } while (this.selectedWindow != startingPoint && ! this.matching[this.selectedWindow]);
     this.updateUI();
 };
-WindowSelector.prototype.clearPattern = function () {
-    this.initialize();
-    this.updateUI();
-};
 WindowSelector.prototype.focusWindow = function () {
     this.windowList[this.selectedWindow].focus();
     this.dismiss();
@@ -141,7 +165,7 @@ WindowSelector.prototype.disableKeys = function () {
 WindowSelector.prototype.getRegexForPattern = function (pattern) {
     var chars = pattern.split("");
     var new_re = chars.join(".*");
-    var result = new RegExp(new_re);
+    var result = new RegExp(new_re, 'i');
     return result;
 };
 WindowSelector.prototype.windowTitle = function (w) {
