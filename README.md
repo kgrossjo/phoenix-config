@@ -31,3 +31,14 @@ You hit a prefix key.  A list of all windows shows up, in "most recently used"
 order.  You enter a filter.  The window list shrinks accordingly.  You move down
 or up the list of matching windows using Tab and Shift+Tab, and you hit Return
 to select the currently selected window.
+
+I don't know a good term to describe how filtering works.  The letters have to
+appear in the order shown, but they don't need to be adjacent.  For example, the
+filter "abc" matches a window "xAxBxCx".
+
+* <kbd>Ctrl-U</kbd> - clears the pattern
+* <kbd>Ctrl-P</kbd> - selects previous match
+* <kbd>Shift-Tab</kbd> - ditto
+* <kbd>Ctrl-N</kbd> - selects the next match
+* <kbd>Tab</kbd> - ditto
+* <kbd>Return</kbd> - selects current window
