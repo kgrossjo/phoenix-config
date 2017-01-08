@@ -62,7 +62,8 @@ wPrefix.addSuffix('4', [], function () {
 });
 wPrefix.addSuffix('r', [], function () { Phoenix.reload(); });
 wPrefix.addSuffix('escape', [], function () {});
-wPrefix.addSuffix('space', ['ctrl', 'alt', 'cmd'], function () {});
+/* Can't bind the same key again, the keys clash. */
+// wPrefix.addSuffix('space', ['ctrl', 'alt', 'cmd'], function () {});
 
 /* Window Selector */
 
