@@ -144,7 +144,7 @@ WindowSelector.prototype.selectPreviousWindow = function () {
     var nWindows = this.windowList.length;
     var startingPoint = this.selectedWindow;
     do {
-        this.selectedWindow = (-1 + this.selectedWindow) % nWindows;
+        this.selectedWindow = (-1 + this.selectedWindow + nWindows) % nWindows;
     } while (this.selectedWindow != startingPoint && ! this.matching[this.selectedWindow]);
     this.updateUI();
 };
