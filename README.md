@@ -6,6 +6,10 @@ Just my personal Phoenix config.  There are two main functions here,
 the first is window management / manipulation inspired by Divvy.  The second
 is a window selector.
 
+June, 2017: I have stopped using Phoenix for now, I have started using
+Hammerspoon.  But Dai Zeng was interested and he has a repository here:
+https://github.com/daizeng1984/phoenix-config
+
 ## Window Management
 
 You hit a prefix key.  Then a popup shows up that explains which keys to press
